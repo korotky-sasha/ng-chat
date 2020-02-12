@@ -1,0 +1,10 @@
+.thread {
+  border: 1px solid aliceblue;
+  &.selected {
+    background: aliceblue;
+    border: 1px solid green;
+  }
+  &:hover {
+    background: grey;
+  }
+}

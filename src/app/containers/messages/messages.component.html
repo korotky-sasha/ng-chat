@@ -1,0 +1,38 @@
+<div class="chat-container" *ngIf="selectedThread">
+  <div class="messages-container">
+    <div *ngFor="let message of selectedThread.messages" class="message">
+      <div
+        *ngIf="message.author && getUser(message.author) | async as user"
+        [ngClass]="{'row': isSelectedUser(user.id), 'row-reverse': !isSelectedUser(user.id)}">
+        <div class="image-container">
+          <img [src]="user.avatarUrl" alt="avatar">
+        </div>
+        <div class="column" [ngClass]="isSelectedUser(user.id) ? '' : 'float-left'">
+          <div class="row text-indent">
+            <p>{{user.name}}</p>
+            <p>{{currentTime$ | async | messageSendTime: message.sendAt}}</p>
+          </div>
+          <div>
+            <div *ngFor="let line of message.text" class="line">{{line}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fit-height">
+    <form [formGroup]="messageForm" (ngSubmit)="sendMessage(messageForm.value.message)" class="fit-height row">
+            <textarea
+              formControlName="message"
+              type="text"
+              rows="4"
+              placeholder="your message"
+              class="textarea full-width"></textarea>
+      <button type="submit" class="float-right">
+        Send
+      </button>
+    </form>
+  </div>
+</div>
+<div *ngIf="!selectedThread">
+  <h1>Please select a thread to display</h1>
+</div>

@@ -1,0 +1,18 @@
+<div class="row">
+  <ng-container *ngIf="thread && getLastMessage() as lastMessage">
+    <ng-container *ngIf="lastMessage.author && author">
+      <div class="image-container">
+        <img [src]="author.avatarUrl" alt="avatar">
+      </div>
+      <div class="chat-message">
+        <span>{{author.name}}</span>
+        <textarea
+          readonly
+          rows = "2"
+          class="textarea hide-overflow cursor-default"
+        >{{lastMessage.text.join('\n')}}</textarea>
+      </div>
+    </ng-container>
+    <div class="float-right">Unread messages: {{getUnreadCount()}}</div>
+  </ng-container>
+</div>

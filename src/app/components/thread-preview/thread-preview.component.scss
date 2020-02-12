@@ -1,0 +1,34 @@
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-message {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px;
+  width: 100%;
+}
+
+.textarea {
+  resize: none;
+  padding: 5px 10px;
+}
+
+.hide-overflow {
+  overflow: hidden;
+}
+
+.cursor-default {
+  cursor: default;
+}
+
+.float-right {
+  margin-left: auto;
+}
