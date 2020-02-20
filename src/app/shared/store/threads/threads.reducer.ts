@@ -18,39 +18,39 @@ const usersReducer = createReducer(
     return newState;
   }),
   on(ThreadsActions.selectThread, (state, props) => {
-    const newState = cloneDeep(state);
-    newState.selectedThread = props.id;
-    newState.threads = newState.threads.map(thread => {
+    const newThreads = state.threads.map(thread => {
       if (thread.id === props.id) {
-        thread.messages = thread.messages.map(message => {
-          message.isRead = true;
-          return message;
+        let changed = false;
+        const newMessages = thread.messages.map(message => {
+          if (!message.isRead) {
+            changed = true;
+          }
+          return message.isRead ? message : {...message, isRead: true};
         });
-        return thread;
+        return changed ? {...thread, messages: newMessages} : thread;
       } else {
         return thread;
       }
     });
-    return newState;
+    return {threads: newThreads, selectedThread: props.id};
   }),
   on(
     ThreadsActions.addMessageSuccess,
     ThreadsActions.addBotMessageSuccess, (state, props) => {
-    const newState = cloneDeep(state);
-    newState.threads = newState.threads.map( thread => {
-      if (thread.id !== props.threadId) {
-        return thread;
-      } else {
-        const newThread = cloneDeep(thread);
-        const newMessage = cloneDeep(props.message);
-        if (props.threadId === state.selectedThread) {
-          newMessage.isRead = true;
+      const newThreads = state.threads.map( thread => {
+        if (thread.id !== props.threadId) {
+          return thread;
+        } else {
+          const newThread = cloneDeep(thread);
+          const newMessage = cloneDeep(props.message);
+          if (props.threadId === state.selectedThread) {
+            newMessage.isRead = true;
+          }
+          newThread.messages.push(newMessage);
+          return newThread;
         }
-        newThread.messages.push(newMessage);
-        return newThread;
-      }
-    });
-    return newState;
+      });
+      return {threads: newThreads, selectedThread: state.selectedThread};
   }),
 );
 

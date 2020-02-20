@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { timer } from 'rxjs';
@@ -11,14 +11,29 @@ import { getSelectedThread } from '../../shared/store/threads/threads.selector';
 import { getSelectedUser, getUser } from '../../shared/store/users/users.selector';
 
 import { ChatState } from '../../shared/models/chat-state';
-import { Thread } from '../../shared/models/threads-data';
+import { Message, Thread } from '../../shared/models/threads-data';
 import { User } from '../../shared/models/users-data';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
-  styleUrls: ['./messages.component.scss']
+  styleUrls: ['./messages.component.scss'],
+  animations: [
+    trigger('newMessage', [
+      transition(':enter', [
+        style({
+          marginLeft: '-100%'
+        }),
+        animate('300ms', style({
+          background: 'green',
+          marginLeft: '0'
+        }))
+      ])
+    ])
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessagesComponent implements OnInit {
   selectedThread$ = this.store.select(getSelectedThread);
@@ -31,11 +46,13 @@ export class MessagesComponent implements OnInit {
     })
   );
   messageForm: FormGroup;
+  messages: Message[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private store: Store<ChatState>,
-    private el: ElementRef
+    private el: ElementRef,
+    private ref: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -51,7 +68,19 @@ export class MessagesComponent implements OnInit {
 
   prepareStore() {
     this.selectedThread$.subscribe(value => {
+      if (value && this.selectedThread && value.id !== this.selectedThread.id) {
+        this.messages = [];
+        // this.messages = value.messages;
+      }
       this.selectedThread = value;
+      if (value && value.id === this.selectedThread.id) {
+        value.messages.filter(message => {
+          return !this.messages.find(item => item.id === message.id);
+        }).forEach(newMessage => {
+          this.messages.push(newMessage);
+        });
+      }
+      this.ref.detectChanges();
       this.scrollToBottom();
     });
     this.selectedUser$.subscribe(value => {

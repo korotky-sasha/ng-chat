@@ -13,6 +13,8 @@
         >{{lastMessage.text.join('\n')}}</textarea>
       </div>
     </ng-container>
-    <div class="float-right">Unread messages: {{getUnreadCount()}}</div>
+    <div *ngIf="unreadCount" @myInsertRemoveTrigger [@counterChange]="unreadCount" class="float-right unread-container">
+      <span>{{unreadCount}}</span>
+    </div>
   </ng-container>
 </div>

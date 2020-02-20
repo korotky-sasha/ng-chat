@@ -127,6 +127,9 @@ const mockUsers = [
   }
 ];
 
+// TODO: animation for new message
+// TODO: replace mock to separate file
+// TODO: mock backend
 
 @Component({
   selector: 'app-root',

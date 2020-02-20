@@ -2,12 +2,17 @@ import { Component, Input } from '@angular/core';
 
 import { Thread } from '../../shared/models/threads-data';
 import { User } from '../../shared/models/users-data';
+import { animations } from './thread-preview.animations';
+
 
 @Component({
   selector: 'app-thread-preview',
   templateUrl: './thread-preview.component.html',
-  styleUrls: ['./thread-preview.component.scss']
+  styleUrls: ['./thread-preview.component.scss'],
+  animations
 })
+
+
 export class ThreadPreviewComponent {
   @Input() thread: Thread;
   @Input() author: User;
@@ -16,7 +21,7 @@ export class ThreadPreviewComponent {
     return  this.thread.messages[this.thread.messages.length - 1];
   }
 
-  getUnreadCount() {
+  get unreadCount() {
     return this.thread ? this.thread.messages.filter( (message) => !message.isRead).length : null;
   }
 

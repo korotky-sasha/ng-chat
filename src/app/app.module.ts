@@ -1,5 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
@@ -8,6 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { AppComponent } from './app.component';
+import { httpInterceptorProviders } from './core/http-interceptors';
 import { reducers, metaReducers, effects } from './shared/store';
 import { environment } from '../environments/environment';
 import { MessageSendTimePipe } from './pipes/message-send-time.pipe';
@@ -25,6 +27,7 @@ import { MessagesComponent } from './containers/messages/messages.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     StoreModule.forRoot(reducers, {
       metaReducers,
@@ -36,7 +39,11 @@ import { MessagesComponent } from './containers/messages/messages.component';
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     EffectsModule.forRoot(effects),
   ],
-  providers: [MessageSendTimePipe, DatePipe],
+  providers: [
+    httpInterceptorProviders,
+    MessageSendTimePipe,
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,10 +5,10 @@ import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { mergeMap, withLatestFrom } from 'rxjs/operators';
 
-import { addMessage } from './threads.actions';
+import { addMessage, addBotMessage } from './threads.actions';
 
 import { getSelectedUser } from '../users/users.selector';
-import { getSelectedThread } from './threads.selector';
+import { getSelectedThread, getThreads } from './threads.selector';
 
 import { ChatState } from '../../models/chat-state';
 import { Message } from '../../models/threads-data';
@@ -23,7 +23,7 @@ export class ThreadsEffects {
     withLatestFrom(this.store.select(getSelectedUser), this.store.select(getSelectedThread)),
     mergeMap(([action, selectedUser, selectedThread]) => {
       const message: Message = {
-        id: selectedThread.messages.length + 1,
+        id: selectedThread.messages.length ? Math.max(...selectedThread.messages.map(x => x.id)) + 1 : 1,
         author: selectedUser.id,
         isRead: true,
         sendAt: action.sandAt,
@@ -41,6 +41,22 @@ export class ThreadsEffects {
         this.chatBotsService.waitingBotMessage(message, selectedThread.id);
       }
       return of({ type: '[ThreadsEffect] Add Message Success', message, threadId: selectedThread.id });
+    })
+  ));
+
+  addBotMessage$ = createEffect(() => this.actions$.pipe(
+    ofType(addBotMessage),
+    withLatestFrom(this.store.select(getThreads)),
+    mergeMap(([action, threads]) => {
+      const selectedThread = threads.find(thread => thread.id === action.threadId);
+      const message: Message = {
+        id: selectedThread.messages.length ? Math.max(...selectedThread.messages.map(x => x.id)) + 1 : 1,
+        author: action.author,
+        isRead: false,
+        sendAt: action.sandAt,
+        text: action.message
+      };
+      return of({ type: '[ThreadsEffect] Add Bot Message Success', message, threadId: selectedThread.id });
     })
   ));
 

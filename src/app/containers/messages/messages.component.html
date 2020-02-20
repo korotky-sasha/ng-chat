@@ -1,6 +1,6 @@
 <div class="chat-container" *ngIf="selectedThread">
   <div class="messages-container">
-    <div *ngFor="let message of selectedThread.messages" class="message">
+    <div *ngFor="let message of messages" @newMessage class="message">
       <div
         *ngIf="message.author && getUser(message.author) | async as user"
         [ngClass]="{'row': isSelectedUser(user.id), 'row-reverse': !isSelectedUser(user.id)}">

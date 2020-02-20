@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { cloneDeep } from 'lodash-es';
 import { Store } from '@ngrx/store';
 
-import { addBotMessageSuccess } from '../shared/store/threads/threads.actions';
+import { addBotMessage } from '../shared/store/threads/threads.actions';
 
 import { ChatState } from '../shared/models/chat-state';
 import { Message } from '../shared/models/threads-data';
@@ -16,6 +16,7 @@ export class ChatBotsService {
   echoBotId = 2;
   reverseBotId = 3;
   waitingBotId = 4;
+  selectedThread = null;
 
   constructor(
     private store: Store<ChatState>
@@ -25,7 +26,7 @@ export class ChatBotsService {
     const botMessage = cloneDeep(message);
     botMessage.author = this.echoBotId;
     botMessage.sendAt = new Date();
-    this.store.dispatch(addBotMessageSuccess({message: botMessage, threadId}));
+    this.store.dispatch(addBotMessage({message: botMessage.text, threadId, sandAt: botMessage.sendAt, author: botMessage.author}));
   }
 
   reverseBotMessage(message: Message, threadId: number) {
@@ -35,14 +36,13 @@ export class ChatBotsService {
     botMessage.text = botMessage.text.map(line => {
       return line.split('').reverse().join('');
     });
-    this.store.dispatch(addBotMessageSuccess({message: botMessage, threadId}));
+    this.store.dispatch(addBotMessage({message: botMessage.text, threadId, sandAt: botMessage.sendAt, author: botMessage.author}));
   }
 
   waitingBotMessage(message: Message, threadId: number) {
     let waitTime = 0;
     const botMessage = cloneDeep(message);
     botMessage.author = this.waitingBotId;
-    botMessage.isRead = false;
     const input = +botMessage.text[0];
     if (input) {
       waitTime = input;
@@ -52,7 +52,7 @@ export class ChatBotsService {
     }
     setTimeout(() => {
       botMessage.sendAt = new Date();
-      this.store.dispatch(addBotMessageSuccess({message: botMessage, threadId}));
+      this.store.dispatch(addBotMessage({message: botMessage.text, threadId, sandAt: botMessage.sendAt, author: botMessage.author}));
     }, waitTime * 1000);
   }
 }

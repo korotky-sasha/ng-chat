@@ -32,3 +32,18 @@
 .float-right {
   margin-left: auto;
 }
+
+.unread-container {
+  min-width: 25px;
+  height: 25px;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  border-radius: 50%;
+  background: lightseagreen;
+  color: white;
+  font-size: larger;
+  span {
+    margin: auto;
+  }
+}

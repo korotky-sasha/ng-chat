@@ -1,10 +1,20 @@
-<div
+<!--<div
   *ngFor="let thread of threads$ | async" class="thread"
   [ngClass]="{'selected': isThreadSelected(thread.id)}"
   (click)="selectThread(thread.id)">
   <ng-container *ngIf="thread && thread.messages && getLastMessage(thread) as lastMessage">
     <ng-container *ngIf="lastMessage.author && getUser(lastMessage.author) | async as author">
       <app-thread-preview [thread]="thread" [author]="author"></app-thread-preview>
+    </ng-container>
+  </ng-container>
+</div>-->
+<div
+  *ngFor="let threadId of threadIds" class="thread"
+  [ngClass]="{'selected': isThreadSelected(threadId)}"
+  (click)="selectThread(threadId)">
+  <ng-container *ngIf="threadsObj.entities && threadsObj.entities[threadId].messages && getLastMessage(threadsObj.entities[threadId]) as lastMessage">
+    <ng-container *ngIf="lastMessage.author && getUser(lastMessage.author) | async as author">
+      <app-thread-preview [thread]="threadsObj.entities[threadId]" [author]="author"></app-thread-preview>
     </ng-container>
   </ng-container>
 </div>

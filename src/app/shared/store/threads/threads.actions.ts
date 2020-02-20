@@ -16,12 +16,17 @@ export const addMessage = createAction(
   props<{message: string[], sandAt: Date}>()
 );
 
+export const addBotMessage = createAction(
+  '[ChatBotsService] Add Bot Message',
+  props<{message: string[], sandAt: Date, threadId: number, author: number}>()
+);
+
 export const addMessageSuccess = createAction(
   '[ThreadsEffect] Add Message Success',
   props<{message: Message, threadId: number}>()
 );
 
 export const addBotMessageSuccess = createAction(
-  '[ChatBotsService] Add Bot Message Success',
+  '[ThreadsEffect] Add Bot Message Success',
   props<{message: Message, threadId: number}>()
 );
