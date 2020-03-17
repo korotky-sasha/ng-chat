@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
-import { Thread } from '../../shared/models/threads-data';
-import { User } from '../../shared/models/users-data';
+import { Thread } from '../../../shared/models/threads-data';
+import { User } from '../../../shared/models/users-data';
 import { animations } from './thread-preview.animations';
 
 

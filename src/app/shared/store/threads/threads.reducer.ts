@@ -18,21 +18,7 @@ const usersReducer = createReducer(
     return newState;
   }),
   on(ThreadsActions.selectThread, (state, props) => {
-    const newThreads = state.threads.map(thread => {
-      if (thread.id === props.id) {
-        let changed = false;
-        const newMessages = thread.messages.map(message => {
-          if (!message.isRead) {
-            changed = true;
-          }
-          return message.isRead ? message : {...message, isRead: true};
-        });
-        return changed ? {...thread, messages: newMessages} : thread;
-      } else {
-        return thread;
-      }
-    });
-    return {threads: newThreads, selectedThread: props.id};
+    return {...state, selectedThread: props.id};
   }),
   on(
     ThreadsActions.addMessageSuccess,
@@ -44,13 +30,29 @@ const usersReducer = createReducer(
           const newThread = cloneDeep(thread);
           const newMessage = cloneDeep(props.message);
           if (props.threadId === state.selectedThread) {
-            newMessage.isRead = true;
           }
           newThread.messages.push(newMessage);
           return newThread;
         }
       });
       return {threads: newThreads, selectedThread: state.selectedThread};
+  }),
+  on(ThreadsActions.readMessage, (state, props) => {
+    const newThreads = state.threads.map(thread => {
+      if (thread.id === state.selectedThread) {
+        let changed = false;
+        const newMessages = thread.messages.map(message => {
+          if (message.id === props.id && !message.isRead) {
+            changed = true;
+          }
+          return changed ? {...message, isRead: true} : message;
+        });
+        return changed ? {...thread, messages: newMessages} : thread;
+      } else {
+        return thread;
+      }
+    });
+    return {threads: newThreads, selectedThread: state.selectedThread};
   }),
 );
 

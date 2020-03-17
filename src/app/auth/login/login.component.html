@@ -1,0 +1,33 @@
+<div class="form-container">
+  <form [formGroup]="loginForm" (ngSubmit)="login()" class="form">
+    <label class="label">
+      <span>Email: </span>
+      <input type="text" formControlName="email" placeholder="email">
+    </label>
+    <ng-container *ngIf="isEmailInvalid()">
+      <span *ngIf="isEmailError()" class="error">
+        Invalid email
+      </span>
+      <span *ngIf="isEmailRequired()" class="error">
+        Email required
+      </span>
+    </ng-container>
+    <label class="label">
+      <span>Password: </span>
+      <input type="password" formControlName="password" placeholder="password">
+    </label>
+    <ng-container *ngIf="isPasswordInvalid()">
+      <span *ngIf="isPasswordSmall()" class="error">
+        Password should be at least 6 characters
+      </span>
+      <span *ngIf="isPasswordRequired()" class="error">
+        Password required
+      </span>
+    </ng-container>
+    <span *ngIf="isAuthError" class="error">
+      Wrong email or password.
+    </span>
+    <button type="submit" [disabled]="!loginForm.valid" class="button-submit">Login</button>
+    <p>No account yet? <a routerLink="/register">Sign up</a></p>
+  </form>
+</div>

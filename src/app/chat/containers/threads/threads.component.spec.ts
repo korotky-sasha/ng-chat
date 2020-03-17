@@ -1,14 +1,35 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { provideMockStore } from '@ngrx/store/testing';
+
 import { ThreadsComponent } from './threads.component';
+import { ThreadPreviewComponent } from '../../components/thread-preview/thread-preview.component';
 
 describe('ThreadsComponent', () => {
   let component: ThreadsComponent;
   let fixture: ComponentFixture<ThreadsComponent>;
 
   beforeEach(async(() => {
+    const initialState = {
+      threadsData: {
+        threads: []
+      },
+      users: {
+        users: [
+          {id: 1, name: 'string', avatarUrl: 'string'}
+        ],
+        selectedUser: 1
+      }
+    };
     TestBed.configureTestingModule({
-      declarations: [ ThreadsComponent ]
+      declarations: [
+        ThreadsComponent,
+        ThreadPreviewComponent
+      ],
+      imports: [],
+      providers: [
+        provideMockStore({initialState})
+      ]
     })
     .compileComponents();
   }));

@@ -5,34 +5,22 @@ import { timer } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 
-import { addMessage } from '../../shared/store/threads/threads.actions';
+import { addMessage, readMessage } from '../../../shared/store/threads/threads.actions';
 
-import { getSelectedThread } from '../../shared/store/threads/threads.selector';
-import { getSelectedUser, getUser } from '../../shared/store/users/users.selector';
+import { getSelectedThread } from '../../../shared/store/threads/threads.selector';
+import { getSelectedUser, getUser } from '../../../shared/store/users/users.selector';
 
-import { ChatState } from '../../shared/models/chat-state';
-import { Message, Thread } from '../../shared/models/threads-data';
-import { User } from '../../shared/models/users-data';
-import { animate, style, transition, trigger } from '@angular/animations';
+import { ChatState } from '../../../shared/models/chat-state';
+import { Message, Thread } from '../../../shared/models/threads-data';
+import { User } from '../../../shared/models/users-data';
+import { animations } from './messages.animations';
 
 
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
   styleUrls: ['./messages.component.scss'],
-  animations: [
-    trigger('newMessage', [
-      transition(':enter', [
-        style({
-          marginLeft: '-100%'
-        }),
-        animate('300ms', style({
-          background: 'green',
-          marginLeft: '0'
-        }))
-      ])
-    ])
-  ],
+  animations,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessagesComponent implements OnInit {
@@ -70,13 +58,15 @@ export class MessagesComponent implements OnInit {
     this.selectedThread$.subscribe(value => {
       if (value && this.selectedThread && value.id !== this.selectedThread.id) {
         this.messages = [];
-        // this.messages = value.messages;
       }
       this.selectedThread = value;
       if (value && value.id === this.selectedThread.id) {
         value.messages.filter(message => {
           return !this.messages.find(item => item.id === message.id);
         }).forEach(newMessage => {
+          if (!newMessage.isRead) {
+            this.store.dispatch(readMessage({id: newMessage.id}));
+          }
           this.messages.push(newMessage);
         });
       }

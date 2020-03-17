@@ -1,0 +1,100 @@
+.main-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.main {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  height: 5%;
+}
+
+.app-title {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-left: 20px;
+  font-size: 24px;
+}
+
+.logout-button {
+  height: fit-content;
+  margin-right: 20px;
+}
+
+.float-left {
+  margin-right: auto;
+}
+
+.float-right {
+  margin-left: auto;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.center-vertical {
+  display: flex;
+  align-items: center;
+}
+
+.threads-chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 95%;
+}
+
+.threads-container {
+  height: 50%;
+  overflow: auto;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 50%;
+  overflow: auto;
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+}
+
+.unread-text {
+  margin-top: auto;
+  margin-bottom: auto;
+  padding-right: 10px;
+}
+
+.unread-counter {
+  min-width: 25px;
+  height: 25px;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-radius: 50%;
+  background: lightseagreen;
+  color: white;
+  font-size: larger;
+  display: inline-block;
+  text-align: center;
+  margin-right: 20px;
+}
+
+.full-height {
+  height: 100%;
+}

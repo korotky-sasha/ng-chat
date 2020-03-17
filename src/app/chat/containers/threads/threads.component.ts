@@ -2,13 +2,13 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 
 import { Store } from '@ngrx/store';
 
-import { selectThread } from '../../shared/store/threads/threads.actions';
+import { selectThread } from '../../../shared/store/threads/threads.actions';
 
-import { getSelectedThread, getThreads } from '../../shared/store/threads/threads.selector';
-import { getUser } from '../../shared/store/users/users.selector';
+import { getSelectedThread, getThreads } from '../../../shared/store/threads/threads.selector';
+import { getUser } from '../../../shared/store/users/users.selector';
 
-import { ChatState } from '../../shared/models/chat-state';
-import { Thread } from '../../shared/models/threads-data';
+import { ChatState } from '../../../shared/models/chat-state';
+import { Thread } from '../../../shared/models/threads-data';
 
 interface ThreadEntities {
   [id: number]: Thread;

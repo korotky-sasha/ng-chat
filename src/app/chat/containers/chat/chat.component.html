@@ -1,0 +1,29 @@
+<div class="main-container">
+  <div class="main">
+    <div class="header">
+      <span class="float-left app-title">Ng-Chat App</span>
+      <div class="row center-vertical">
+        <button (click)="logout()" class="logout-button">Logout</button>
+        <div class="float-right row">
+          <span class="unread-text">Total unread</span>
+          <div
+            *ngIf="totalUnreadMessagesNumber$ | async as unreadCounter"
+            [@counterChange]="unreadCounter"
+            class="unread-counter">
+            <span>{{unreadCounter}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="threads-chat-container">
+      <div class="threads-container">
+        <app-threads></app-threads>
+      </div>
+      <div class="chat-container">
+        <div class="full-height">
+          <app-messages></app-messages>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

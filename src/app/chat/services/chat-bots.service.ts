@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { cloneDeep } from 'lodash-es';
 import { Store } from '@ngrx/store';
 
-import { addBotMessage } from '../shared/store/threads/threads.actions';
+import { addBotMessage } from '../../shared/store/threads/threads.actions';
 
-import { ChatState } from '../shared/models/chat-state';
-import { Message } from '../shared/models/threads-data';
+import { ChatState } from '../../shared/models/chat-state';
+import { Message } from '../../shared/models/threads-data';
 
 
 @Injectable({

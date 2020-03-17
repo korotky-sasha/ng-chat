@@ -13,7 +13,7 @@ import { getSelectedThread, getThreads } from './threads.selector';
 import { ChatState } from '../../models/chat-state';
 import { Message } from '../../models/threads-data';
 
-import { ChatBotsService } from '../../../services/chat-bots.service';
+import { ChatBotsService } from '../../../chat/services/chat-bots.service';
 
 
 @Injectable()
@@ -25,7 +25,7 @@ export class ThreadsEffects {
       const message: Message = {
         id: selectedThread.messages.length ? Math.max(...selectedThread.messages.map(x => x.id)) + 1 : 1,
         author: selectedUser.id,
-        isRead: true,
+        isRead: false,
         sendAt: action.sandAt,
         text: action.message
       };

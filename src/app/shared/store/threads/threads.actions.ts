@@ -30,3 +30,8 @@ export const addBotMessageSuccess = createAction(
   '[ThreadsEffect] Add Bot Message Success',
   props<{message: Message, threadId: number}>()
 );
+
+export const readMessage = createAction(
+  '[MessagesComponent] Read Message',
+  props<{id: number}>()
+);
