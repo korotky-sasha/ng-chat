@@ -8,6 +8,7 @@ import { ChatComponent } from './containers/chat/chat.component';
 import { ThreadsComponent } from './containers/threads/threads.component';
 import { MessagesComponent } from './containers/messages/messages.component';
 import { ThreadPreviewComponent } from './components/thread-preview/thread-preview.component';
+import { MessageComponent } from './components/message/message.component';
 
 import { MessageSendTimePipe } from './pipes/message-send-time.pipe';
 
@@ -18,6 +19,7 @@ import { MessageSendTimePipe } from './pipes/message-send-time.pipe';
     ThreadsComponent,
     MessagesComponent,
     ThreadPreviewComponent,
+    MessageComponent,
     MessageSendTimePipe
   ],
   imports: [

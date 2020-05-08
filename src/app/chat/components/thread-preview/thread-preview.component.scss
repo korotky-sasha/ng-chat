@@ -9,6 +9,12 @@
   align-items: center;
 }
 
+.image {
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
+}
+
 .chat-message {
   display: flex;
   flex-direction: column;

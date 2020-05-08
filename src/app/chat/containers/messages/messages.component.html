@@ -1,22 +1,12 @@
 <div class="chat-container" *ngIf="selectedThread">
   <div class="messages-container">
     <div *ngFor="let message of messages" [@newMessage]="!message.isRead ? 'true' : ''" class="message">
-      <div
-        *ngIf="message.author && getUser(message.author) | async as user"
-        [ngClass]="{'row': isSelectedUser(user.id), 'row-reverse': !isSelectedUser(user.id)}">
-        <div class="image-container">
-          <img [src]="user.avatarUrl" alt="avatar">
-        </div>
-        <div class="column" [ngClass]="isSelectedUser(user.id) ? '' : 'float-left'">
-          <div class="row text-indent">
-            <p>{{user.name}}</p>
-            <p>{{currentTime$ | async | messageSendTime: message.sendAt}}</p>
-          </div>
-          <div>
-            <div *ngFor="let line of message.text" class="line">{{line}}</div>
-          </div>
-        </div>
-      </div>
+      <app-message
+        [message]="message"
+        [user]="getUser(message.author) | async"
+        [isSelectedUser]="isSelectedUser((getUser(message.author) | async).id)"
+        [currentTime$]="currentTime$">
+      </app-message>
     </div>
   </div>
   <div class="fit-height">

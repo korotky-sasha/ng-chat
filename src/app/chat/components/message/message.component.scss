@@ -1,0 +1,39 @@
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 50%;
+}
+
+.line {
+  padding: 0 10px;
+  min-height: 18px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.text-indent {
+  text-indent: 20px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.row-reverse {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.float-left {
+  margin-right: auto;
+}

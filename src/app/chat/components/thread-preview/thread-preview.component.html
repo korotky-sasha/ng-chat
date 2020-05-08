@@ -2,7 +2,7 @@
   <ng-container *ngIf="thread && getLastMessage() as lastMessage">
     <ng-container *ngIf="lastMessage.author && author">
       <div class="image-container">
-        <img [src]="author.avatarUrl" alt="avatar">
+        <img [src]="author.avatarUrl" (error)="invalidImage($event)" alt="avatar" class="image">
       </div>
       <div class="chat-message">
         <span>{{author.name}}</span>

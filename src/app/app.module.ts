@@ -36,7 +36,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
   ],
   providers: [
-    httpInterceptorProviders,
+    // httpInterceptorProviders,
   ],
   bootstrap: [AppComponent]
 })

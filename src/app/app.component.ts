@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 // TODO: use backend
+// TODO: draft message
 
 @Component({
   selector: 'app-root',

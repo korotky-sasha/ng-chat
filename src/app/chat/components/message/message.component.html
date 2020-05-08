@@ -1,0 +1,16 @@
+<div
+  *ngIf="message.author && user"
+  [ngClass]="{'row': isSelectedUser, 'row-reverse': !isSelectedUser}">
+  <div class="image-container">
+    <img [src]="user.avatarUrl" (error)="invalidImage($event)" alt="avatar" class="image">
+  </div>
+  <div class="column" [ngClass]="isSelectedUser ? '' : 'float-left'">
+    <div class="row text-indent">
+      <p>{{user.name}}</p>
+      <p>{{currentTime$ | async | messageSendTime: message.sendAt}}</p>
+    </div>
+    <div>
+      <div *ngFor="let line of message.text" class="line">{{line}}</div>
+    </div>
+  </div>
+</div>

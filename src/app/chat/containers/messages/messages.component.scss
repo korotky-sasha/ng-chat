@@ -20,17 +20,6 @@
   box-shadow: 1px 2px #80808080;
 }
 
-.line {
-  padding: 0 10px;
-  min-height: 18px;
-}
-
-.image-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .textarea {
   resize: none;
   width: 100%;
@@ -42,26 +31,8 @@
   flex-direction: row;
 }
 
-.row-reverse {
-  display: flex;
-  flex-direction: row-reverse;
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-}
-
-.text-indent {
-  text-indent: 20px;
-}
-
 .fit-height {
   height: fit-content;
-}
-
-.float-left {
-  margin-right: auto;
 }
 
 .float-right {

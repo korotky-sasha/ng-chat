@@ -6,27 +6,28 @@ export interface ChatState {
   threadsData: ThreadsData;
 }
 
-// something like this should be stored on mock backend
+// something like this should be stored on backend
 
 interface NewMessage {
   id: number;
   isRead: boolean;
 }
 
-interface NewThread {
+interface UserThread {
   id: number;
   messages: NewMessage[];
+  draft: string[]; // maybe just on client side
 }
 
 interface NewUser {
   id: number;
   name: string;
-  threads: NewThread[];
+  threads: UserThread[];
 }
 
 interface NewUsersData {
   users: NewUser[];
-  selectedUser: number;
+  onlineUsers: number[];
 }
 
 interface NewChatState {
