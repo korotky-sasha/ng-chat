@@ -10,7 +10,8 @@ import { AuthService } from '../../../auth/services/auth.service';
 
 import { ChatState } from '../../../shared/models/chat-state';
 import { Thread } from '../../../shared/models/threads-data';
-import { animations } from '../../../app.animations';
+import { animations } from './chat.animations';
+import { result } from 'lodash-es';
 
 const mockThreads: Thread[] = [
   {
