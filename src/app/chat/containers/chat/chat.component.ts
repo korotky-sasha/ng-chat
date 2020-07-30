@@ -11,7 +11,6 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { ChatState } from '../../../shared/models/chat-state';
 import { Thread } from '../../../shared/models/threads-data';
 import { animations } from './chat.animations';
-import { result } from 'lodash-es';
 
 const mockThreads: Thread[] = [
   {
@@ -107,26 +106,34 @@ const mockThreads: Thread[] = [
   }
 ];
 
+// assets for StackBlitz
+
+// https://picsum.photos/49/49
+
 const mockUsers = [
   {
     id: 1,
     name: 'John',
-    avatarUrl: 'assets/img/avatar1.png'
+    // avatarUrl: 'assets/img/avatar1.png'
+    avatarUrl: 'https://picsum.photos/id/133/49/49'
   },
   {
     id: 2,
     name: 'Echo bot',
-    avatarUrl: 'assets/img/avatar2.png'
+    // avatarUrl: 'assets/img/avatar2.png'
+    avatarUrl: 'https://picsum.photos/id/174/49/49'
   },
   {
     id: 3,
     name: 'Reverse bot',
-    avatarUrl: 'assets/img/avatar3.png'
+    // avatarUrl: 'assets/img/avatar3.png'
+    avatarUrl: 'https://picsum.photos/id/490/49/49'
   },
   {
     id: 4,
     name: 'Waiting bot',
-    avatarUrl: 'assets/img/avatar4.png'
+    // avatarUrl: 'assets/img/avatar4.png'
+    avatarUrl: 'https://picsum.photos/id/435/49/49'
   }
 ];
 
